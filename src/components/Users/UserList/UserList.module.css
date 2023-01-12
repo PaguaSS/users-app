@@ -1,0 +1,8 @@
+.list {
+    background-color: #fff;
+    padding: 25px;
+    list-style: none;
+    border-radius: 5px;
+    max-height: 350px;
+    overflow: scroll;
+}

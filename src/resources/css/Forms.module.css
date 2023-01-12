@@ -1,0 +1,28 @@
+.form {
+    background-color: #fff;
+    padding: 25px;
+}
+
+.form > * {
+    margin: 10px 0px 10px 0px;
+}
+
+.form.card-style {
+    border-radius: 5px;
+}
+
+.form-control label, .form-control input {
+    display: block;
+    width: 100%;
+}
+
+.form-control input[type="text"],
+.form-control input[type="number"],
+.form-control input[type="date"] 
+{
+    height: 27px;
+}
+
+.form-control label + input {
+    margin-top: 5px;
+}

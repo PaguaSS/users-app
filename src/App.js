@@ -1,25 +1,46 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import UserForm from './components/Users/UserForm/UserForm';
 import './App.css';
+import UserList from './components/Users/UserList/UserList';
+import Modal from './components/UI/ErrorModal/Modal/Modal';
 
-function App() {
+const App = () => {
+  const [users, setUsers] = useState([]);
+  const [errorObj, setErrorObj] = useState({showModal: false, msg: ""});
+
+  const addUserEventHandler = userData => {
+    setUsers(prevUserList => {
+      const newUserList = [
+        {
+          id: Math.floor(Math.random() * Date.now()),
+          username: userData.username,
+          age: userData.age 
+        },
+        ...prevUserList
+      ];
+
+      return newUserList;
+    });
+  };
+
+  const showErrorModalHandler = errorObj => {
+    setErrorObj({
+      showModal: errorObj.visible ?? false,
+      msg: errorObj.msg ?? ""
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <main>
+        <UserForm onAddUser={addUserEventHandler} onShowErrorModal={showErrorModalHandler}/>
+        <UserList data={users}/>
+      </main>
+      <Modal visible={errorObj.showModal} onShowErrorModal={showErrorModalHandler}>
+        <p>{errorObj.msg}</p>
+      </Modal>
+    </>
   );
-}
+};
 
 export default App;
