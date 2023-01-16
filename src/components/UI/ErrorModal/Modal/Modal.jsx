@@ -1,3 +1,4 @@
+import ReactDOM  from 'react-dom';
 import Button from '../../Button/Button';
 import styles from './Modal.module.css';
 
@@ -8,7 +9,7 @@ const Modal = props => {
         }
     };
 
-    return (
+    const ErrorModal = props => 
         <div className={`${styles.modal} ${!props.visible && styles.hidden} ${props.className ?? ''} `} onClick={onCloseHandler}>
             <div className={styles['modal-content']} onClick={e => e.stopPropagation()}>
                 <div className={styles['modal-header']}>
@@ -20,8 +21,18 @@ const Modal = props => {
                     <Button type='button' onClick={onCloseHandler}>Okay</Button>
                 </div>
             </div>
-        </div>
-    )
+        </div>;
+
+    return ReactDOM.createPortal(
+        <ErrorModal 
+            visible={props.visible ?? false} 
+            header={props.header} 
+            className={props.className}
+        >
+        {props.children}
+        </ErrorModal>,
+        document.getElementById("global-elements")
+    );
 };
 
 export default Modal;

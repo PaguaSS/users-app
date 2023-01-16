@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import UserForm from './components/Users/UserForm/UserForm';
 import './App.css';
 import UserList from './components/Users/UserList/UserList';
@@ -31,7 +31,7 @@ const App = () => {
   };
 
   return (
-    <>
+    <React.Fragment>
       <main>
         <UserForm onAddUser={addUserEventHandler} onShowErrorModal={showErrorModalHandler}/>
         <UserList data={users}/>
@@ -39,7 +39,7 @@ const App = () => {
       <Modal visible={errorObj.showModal} onShowErrorModal={showErrorModalHandler}>
         <p>{errorObj.msg}</p>
       </Modal>
-    </>
+    </React.Fragment>
   );
 };
 
